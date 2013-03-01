@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>My Hakyll Blog - Kickstart your scala API client by turning JSON into case classes.</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <!--[if IE 7]>
+        <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
+        <![endif]-->
+    </head>
+    <body>
+       <div id="main" class="container-fluid">
+       
+          <header class="hero-unit">
+             <div class="row-fluid">
+                <div class="span12">
+                   <a href="../">
+          <h1>waxzce's blog</h1>
+          <p>based on a misunderstanding...</p>
+       </a>
+       </div>
+          
+          
+          
+          
+       </div>
+          </header>
+          <div class="main-section">
+          <div class="row-fluid">
+       
+
+        <section class="span9">
+           <div>
+              <div class="page-header">
+            <h1>Kickstart your scala API client by turning JSON into case classes.</h1>
+         </div>
+
+            <div class="info-post">Posted on February 21, 2013</div>
+<div class="post">
+<div class="alert alert-info">
+<strong><i class="icon-random"></i> Cross posting</strong> This article is cross posted from the Clever Cloud technical blog. <a href="http://engineering.clever-cloud.com/scala/2013/02/21/json2caseclass-Kickstart-your-scala-API-client-by-turning-JSON-into-case-classes.html">You can read it here.</a>
+</div>
+
+<h2 id="why-code-generation">Why code generation ?</h2>
+<p>When interacting with 3rd party json-based APIs from scala, modelling the API’s responses with case classes can come in handy. If the JSON exhibits some properties (homogenous lists, for instance), it’s easy to create a case class with the same structure. With some deserialization magic it’s easier to deal with the API’s responses.</p>
+<p>So basically is borring to write the case class, and the tool is doing it for you. The target was not to be perfect, but just to allow you quickly generate some case class.</p>
+<p>You can test it here : <a href="http://json2caseclass.cleverapps.io/">http://json2caseclass.cleverapps.io/</a></p>
+<p>So here is the repo :</p>
+<div class="github-widget" data-repo="CleverCloud/json2caseclass"> </div>
+
+
+<h2 id="features">Features</h2>
+<p>json 2 case class can generate * nested case classes from JSON objects * lists from JSON arrays * scala base types from JSON primitives * Option[T] for optional values</p>
+<h2 id="example">Example</h2>
+<p>Here is an example with some github issues API data</p>
+<p>json from github :</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+  {
+    <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;https://api.github.com/repos/octocat/Hello-World/issues/1347&quot;</span>,
+    <span class="dt">&quot;html_url&quot;</span>: <span class="st">&quot;https://github.com/octocat/Hello-World/issues/1347&quot;</span>,
+    <span class="dt">&quot;number&quot;</span>: <span class="dv">1347</span>,
+    <span class="dt">&quot;state&quot;</span>: <span class="st">&quot;open&quot;</span>,
+    <span class="dt">&quot;title&quot;</span>: <span class="st">&quot;Found a bug&quot;</span>,
+    <span class="dt">&quot;body&quot;</span>: <span class="st">&quot;I'm having a problem with this.&quot;</span>,
+    <span class="dt">&quot;user&quot;</span>: {
+      <span class="dt">&quot;login&quot;</span>: <span class="st">&quot;octocat&quot;</span>,
+      <span class="dt">&quot;id&quot;</span>: <span class="dv">1</span>,
+      <span class="dt">&quot;avatar_url&quot;</span>: <span class="st">&quot;https://github.com/images/error/octocat_happy.gif&quot;</span>,
+      <span class="dt">&quot;gravatar_id&quot;</span>: <span class="st">&quot;somehexcode&quot;</span>,
+      <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;https://api.github.com/users/octocat&quot;</span>
+    },
+    <span class="dt">&quot;labels&quot;</span>: [
+      {
+        <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;https://api.github.com/repos/octocat/Hello-World/labels/bug&quot;</span>,
+        <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;bug&quot;</span>,
+        <span class="dt">&quot;color&quot;</span>: <span class="st">&quot;f29513&quot;</span>
+      }
+    ],
+    <span class="dt">&quot;assignee&quot;</span>: {
+      <span class="dt">&quot;login&quot;</span>: <span class="st">&quot;octocat&quot;</span>,
+      <span class="dt">&quot;id&quot;</span>: <span class="dv">1</span>,
+      <span class="dt">&quot;avatar_url&quot;</span>: <span class="st">&quot;https://github.com/images/error/octocat_happy.gif&quot;</span>,
+      <span class="dt">&quot;gravatar_id&quot;</span>: <span class="st">&quot;somehexcode&quot;</span>,
+      <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;https://api.github.com/users/octocat&quot;</span>
+    },
+    <span class="dt">&quot;milestone&quot;</span>: {
+      <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;https://api.github.com/repos/octocat/Hello-World/milestones/1&quot;</span>,
+      <span class="dt">&quot;number&quot;</span>: <span class="dv">1</span>,
+      <span class="dt">&quot;state&quot;</span>: <span class="st">&quot;open&quot;</span>,
+      <span class="dt">&quot;title&quot;</span>: <span class="st">&quot;v1.0&quot;</span>,
+      <span class="dt">&quot;description&quot;</span>: <span class="st">&quot;&quot;</span>,
+      <span class="dt">&quot;creator&quot;</span>: {
+        <span class="dt">&quot;login&quot;</span>: <span class="st">&quot;octocat&quot;</span>,
+        <span class="dt">&quot;id&quot;</span>: <span class="dv">1</span>,
+        <span class="dt">&quot;avatar_url&quot;</span>: <span class="st">&quot;https://github.com/images/error/octocat_happy.gif&quot;</span>,
+        <span class="dt">&quot;gravatar_id&quot;</span>: <span class="st">&quot;somehexcode&quot;</span>,
+        <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;https://api.github.com/users/octocat&quot;</span>
+      },
+      <span class="dt">&quot;open_issues&quot;</span>: <span class="dv">4</span>,
+      <span class="dt">&quot;closed_issues&quot;</span>: <span class="dv">8</span>,
+      <span class="dt">&quot;created_at&quot;</span>: <span class="st">&quot;2011-04-10T20:09:31Z&quot;</span>,
+      <span class="dt">&quot;due_on&quot;</span>: <span class="dv">null</span>
+    },
+    <span class="dt">&quot;comments&quot;</span>: <span class="dv">0</span>,
+    <span class="dt">&quot;pull_request&quot;</span>: {
+      <span class="dt">&quot;html_url&quot;</span>: <span class="st">&quot;https://github.com/octocat/Hello-World/issues/1347&quot;</span>,
+      <span class="dt">&quot;diff_url&quot;</span>: <span class="st">&quot;https://github.com/octocat/Hello-World/issues/1347.diff&quot;</span>,
+      <span class="dt">&quot;patch_url&quot;</span>: <span class="st">&quot;https://github.com/octocat/Hello-World/issues/1347.patch&quot;</span>
+    },
+    <span class="dt">&quot;closed_at&quot;</span>: <span class="dv">null</span>,
+    <span class="dt">&quot;created_at&quot;</span>: <span class="st">&quot;2011-04-22T13:33:48Z&quot;</span>,
+    <span class="dt">&quot;updated_at&quot;</span>: <span class="st">&quot;2011-04-22T13:33:48Z&quot;</span>
+  }
+]</code></pre>
+<p>generated Scala :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">User</span>(login:String, id:Double, avatar_url:String, gravatar_id:String, url:String)
+<span class="kw">case</span> <span class="kw">class</span> <span class="fu">Labels</span>(url:String, name:String, color:String)
+<span class="kw">case</span> <span class="kw">class</span> <span class="fu">Milestone</span>(url:String, number:Double, state:String, title:String, description:String, creator:User, open_issues:Double, closed_issues:Double, created_at:String, due_on:String)
+<span class="kw">case</span> <span class="kw">class</span> <span class="fu">Pull_request</span>(html_url:String, diff_url:String, patch_url:String)
+<span class="kw">case</span> <span class="kw">class</span> <span class="fu">Issue</span>(url:String, html_url:String, number:Double, state:String, title:String, body:String, user:User, labels:List[Labels], assignee:User, milestone:Milestone, comments:Double, pull_request:Option[Pull_request], closed_at:Option[String], created_at:String, updated_at:String)</code></pre>
+<p>I hope you’ll enjoy it. Feel free to propose new features and/or to contribute !</p>
+</div>
+         </div>
+         <div>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'waxzceblog'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+         </div>
+        </section>
+        <section class="span3 well">
+           <img id="profileimg" src="http://www.gravatar.com/avatar/493f5803d30d7583bf1bdf4b237b9186?s=400" />
+           <h3><i class="icon-user"></i> Find me</h3>
+           <p><a href="https://twitter.com/waxzce" class="twitter-follow-button" data-size="large" data-show-count="false">Follow @waxzce</a>
+              <p><a class="btn" href="http://fr.linkedin.com/in/waxzce"><i class="icon-linkedin-sign"></i> on linkedin</a></p>
+              <p><a class="btn" href="http://github.com/waxzce"><i class="icon-github"></i> on github</a></p>
+              <p><a class="btn" href="mailto:quentin.adam@waxzce.org"><i class="icon-envelope"></i> mail me</a></p>
+              <p>I'm the CEO of <a href="http://www.clever-cloud.com">Clever Cloud</a> but this blog is just mine.</p>
+           <hr />
+          <p> <a class="btn" href="../archive.html"><i class="icon-reorder"></i> All the posts</a></p>
+           <hr />
+            <h3><i class="icon-share"></i> Share the page</h3>
+<p>            <a href="https://twitter.com/share" class="twitter-share-button" data-related="clever_cloud">Tweet</a></p>
+<p>
+<g:plusone></g:plusone></p>
+<hr />
+<a href="http://www.clever-cloud.com"><img class="pull-right" src="../images/host-v-black.png"></a>
+Site proudly generated by
+<a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </section>
+     </div>
+  </div>
+        
+        <div class="row-fluid">
+         
+        <footer class="span12">
+            
+        </footer>
+     </div>
+     <hr />
+     </div>
+        
+        
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.githubRepoWidget.min.js"></script>
+        
+        
+	  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+     <div id="fb-root"></div>
+     <script>(function(d, s, id) {
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) return;
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=353048934778048";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));</script>
+     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+     <script>
+     	var _gaq=[['_setAccount','UA-21533263-3'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+     	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+     	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+     	s.parentNode.insertBefore(g,s)}(document,'script'));
+     </script>
+    </body>
+</html>
