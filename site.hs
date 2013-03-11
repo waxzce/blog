@@ -23,6 +23,10 @@ main = hakyll $ do
     match "site_content/*" $ do
         route   idRoute
         compile copyFileCompiler
+   
+    match "site_content/*/*" $ do
+        route   idRoute
+        compile copyFileCompiler
 
     match "css/*.css" $ do
         route   idRoute
