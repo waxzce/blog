@@ -10,7 +10,7 @@ It's the system wide variable used to find binaries. So it's quite important and
 
 ##Management ?
 
-When you install new software in your /opt or from source, in many case, installer tell you to add on you ~/.bashrc or ~/.profile something like 
+When you install new software in your `/opt` or from source, in many cases, the installer tells you to add in your `~/.bashrc` or `~/.profile` something like 
 
 ```bash
 export PATH=/going/somewhere:$PATH
@@ -18,17 +18,17 @@ export PATH=/going/somewhere:$PATH
 
 and your bash config files become __ugly__ in just a few weeks...
 
-##But the is another way !
+##But there is another way !
 
 <i class="icon-ambulance icon-3x pull-right" style="color:#666666"></i>
 
-On your /etc there is a /etc/paths file with just one path per line and a /etc/paths.d/ directory with file per program. It add all these dir to the $PATH automatically but do not ugly your .bashrc or .profile files. 
+In your `/etc` there is a `/etc/paths` file with just one path per line and a `/etc/paths.d/` directory with one file per program. It adds all these dir to the `$PATH` automatically whithout uglifying your `.bashrc` or your `.profile`. 
 
-##If order matter
+##When order matters
 
-Just trick with number on the beginig of file name :-)
+Just use numbers at the beginning of file names :-)
 
 <i class="icon-thumbs-up pull-left" style="color:#666666;margin:4px"></i>
 
-Very few peoples know about that, but it's clean and useful. 
+Very few people know about that, but it's clean and useful. 
 
