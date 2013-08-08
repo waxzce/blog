@@ -8,6 +8,8 @@ title: talk : JavaScript as Data Processing Language at Qcon London 2013
 
 I was very happy to be invited to speak at the [qcon london](http://www.qconlondon.com/) event. This conference is well know and speakers are great. It's a big pleasure to be part of it ! So thank a lot to the organizers to bring me in. It was cool and I met a lot of kind peoples.
 
+And it's cool to be in London ;-)
+
 
 ##JavaScript as Data Processing Language at Qcon London 2013
 

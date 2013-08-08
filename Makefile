@@ -4,7 +4,7 @@ build: site
 	./site build
 
 site: site.hs 
-	ghc --make site.hs
+	ghc --make site.hs -package-db cabal-dev/packages-7.6.3.conf
 	./site clean
 
 preview: site

@@ -4,3 +4,4 @@ site
 site.o
 site.hi
 cabal-dev
+.DS_Store
